@@ -21,14 +21,12 @@ class Authentication extends Controller
     {
         $request->validate([
             'name'=>'required|min:3',
-            'lastname'=>'required|min:3',
             'email'=>'required|min:3|email',
             'password'=>'required|min:3',
 
         ]);
         $user=User::create([
             'name'=>ucwords($request->name),
-            'lastname'=>$request->lastname,
             'email'=>$request->email,
             'password'=>bcrypt($request->password),
 
