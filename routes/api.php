@@ -28,3 +28,4 @@ Route::get('user',function(Request $request){
 
 });
 Route::post('register',[Authentication::class,'register']);
+
