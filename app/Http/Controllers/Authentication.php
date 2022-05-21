@@ -28,7 +28,7 @@ class Authentication extends Controller
         ]);
         $user=User::create([
             'name'=>ucwords($request->name),
-            'lastname'=>ucwords($request->lastname),
+            'lastname'=>$request->lastname,
             'email'=>$request->email,
             'password'=>bcrypt($request->password),
 
