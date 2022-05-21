@@ -31,7 +31,10 @@ class Authentication extends Controller
             'password'=>bcrypt($request->password),
 
         ]);
-        return $this->response($user);
+        return $this->json([
+            'user'=>$user,
+            'token_type'=>'Bearer'
+        ]);
     }
     public function login(Request $request)
     {
