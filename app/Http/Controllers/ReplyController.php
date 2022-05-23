@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reply;
+use Illuminate\Support\Facades\DB;
 
 class ReplyController extends Controller
 {
@@ -35,7 +36,7 @@ class ReplyController extends Controller
             $reply=reply::create([
                 'description' => $request->description,
                 'id_comment' => $request->id_comment,
-                'id_user' => $user->id
+                'id_user' => $request->id_user
             ]);
             return response()->json(['replyInsertComplete' => $reply]);
 

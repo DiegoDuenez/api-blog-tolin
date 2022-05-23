@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comments;
+use Illuminate\Support\Facades\DB;
 
 class CommentsController extends Controller
 {
@@ -33,7 +34,7 @@ class CommentsController extends Controller
             $Comments=comments::create([
                 'description' => $request->description,
                 'id_post' => $request->nombreCategoria,
-                'id_user' => $user->id
+                'id_user' => $request->id_user
             ]);
             return response()->json(['commentInsertComplete' => $Comments]);
 
