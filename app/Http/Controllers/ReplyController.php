@@ -18,8 +18,8 @@ class ReplyController extends Controller
     //pagina Reply
     public function get()
     {
-      $reply = DB::table('reply')->get();
-      return response()->json(['replyList' => $reply]);
+        $reply = Reply::all();
+        return response()->json(['replyList' => $reply]);
     }
 
 
@@ -33,7 +33,7 @@ class ReplyController extends Controller
             'id_user'=>'required'
         ]))
         {
-            $reply=reply::create([
+            $reply=Reply::create([
                 'description' => $request->description,
                 'id_comment' => $request->id_comment,
                 'id_user' => $request->id_user
@@ -49,12 +49,6 @@ class ReplyController extends Controller
 
 
 
-
-
-
-
-
-
     public function update(Request $request,$id)
     {
         if ($request->validate([
@@ -63,7 +57,7 @@ class ReplyController extends Controller
             'id_user'=>'required'
         ]))
         {
-            $reply = reply::findOrFail($id);
+            $reply = Reply::findOrFail($id);
             $reply->description = $request->description;
             $reply->save();
             return response()->json(['replyUpdateComplete' => $reply]);
@@ -75,9 +69,6 @@ class ReplyController extends Controller
     }
 
 
-
-
-
     public function delete(Request $request,$id)
     {
         if ($request->validate([
@@ -86,8 +77,7 @@ class ReplyController extends Controller
             'id_user'=>'required'
         ]))
         {
-            $deleted = DB::table('reply')
-            ->where('reply.id', $id)
+            $deleted = Reply::where('reply.id', $id)
             ->delete();
             return response()->json(['replyDeleteComplete']);
         }else

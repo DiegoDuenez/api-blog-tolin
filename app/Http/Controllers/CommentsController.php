@@ -18,8 +18,8 @@ class CommentsController extends Controller
     //pagina Comments
     public function get()
     {
-      $Comments = DB::table('comments')->get();
-      return response()->json(['commentsList' => $Comments]);
+        $Comments = Comments::all();
+        return response()->json(['commentsList' => $Comments]);
     }
 
 
@@ -31,7 +31,7 @@ class CommentsController extends Controller
             'id_user'=>'required'
         ]))
         {
-            $Comments=comments::create([
+            $Comments=Comments::create([
                 'description' => $request->description,
                 'id_post' => $request->nombreCategoria,
                 'id_user' => $request->id_user
@@ -54,7 +54,7 @@ class CommentsController extends Controller
             'id_user'=>'required'
         ]))
         {
-        $Comments = comments::findOrFail($id);
+        $Comments = Comments::findOrFail($id);
         $Comments->description = $request->description;
         $Comments->save();
         return response()->json(['commentUpdateComplete' => $Comments]);
@@ -73,8 +73,7 @@ class CommentsController extends Controller
             'id_user'=>'required'
         ]))
         {
-            $deleted = DB::table('comments')
-            ->where('Comments.id', $id)
+            $deleted = Comments::where('Comments.id', $id)
             ->delete();
             return response()->json(['commentDeleteComplete']);
         }else

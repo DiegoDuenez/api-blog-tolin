@@ -16,8 +16,8 @@ class CategoriesController extends Controller
     //pagina categories
     public function get()
     {
-      $categories = DB::table('categories')->get();
-      return response()->json(['categoriesList' => $categories]);
+        $categories = Categories::all();
+        return response()->json(['categoriesList' => $categories]);
     }
 
 
@@ -27,7 +27,7 @@ class CategoriesController extends Controller
             'category_name'=>'required|min:2'
         ]))
         {
-            $categories=categories::create([
+            $categories=Categories::create([
                 'category_name' => $request->category_name,
             ]);
             return response()->json(['categoriesInsertComplete' => $categories]);
@@ -46,7 +46,7 @@ class CategoriesController extends Controller
             'category_name'=>'required|min:2'
         ]))
         {
-            $categories = categories::findOrFail($id);
+            $categories = Categories::findOrFail($id);
             $categories->category_name = $request->category_name;
 
             $categories->save();
@@ -69,8 +69,7 @@ class CategoriesController extends Controller
             'category_name'=>'required|min:2'
         ]))
         {
-            $deleted = DB::table('categories')
-            ->where('categories.id', $id)
+            $categories = Categories::where('categories.id', $id)
             ->delete();
             return response()->json(['categoriesUpdateComplete']);
         }else
