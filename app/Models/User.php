@@ -41,4 +41,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function Categories(){
+        return $this->belongsTo('App\Models\Categories');
+
+    }
+    public function Post(){
+        return $this->belongsTo('App\Models\Post');
+
+    }
+    public function Comments(){
+        return $this->belongsTo('App\Models\Comments');
+
+    }
+    public function Reply(){
+        return $this->belongsTo('App\Models\Reply');
+
+    }
 }

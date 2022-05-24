@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Categories extends Model
 {
     use HasFactory;
-    protected $table = 'categories';}
+    protected $table = 'categories';
+    protected $fillable = [
+        'category_name',
+    ];
+    public function User(){
+
+        return $this->hasMany('App\modelos\User');
+
+    }
+    public function PostCategories(){
+
+        return $this->hasMany('App\Models\Post_categories');
+
+    }
+}
