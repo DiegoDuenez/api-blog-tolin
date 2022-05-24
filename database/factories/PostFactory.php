@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use App\Models\User;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -16,8 +18,12 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $usuario=User::all()->inRandomOrder()->first();
+
         return [
-            //
+            'title' => Str::random(5),
+            'description' => Str::random(10),
+            'user_id' => $usuario->id
         ];
     }
 }

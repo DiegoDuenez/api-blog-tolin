@@ -13,10 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post_categories', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id')->constrained('posts');
-            $table->foreignId('id')->constrained('categories');
+        Schema::create('post_categories', function (Blueprint $table) 
+        {
+            $table->bigIncrements('id');
+
+            $table->unsignedBigInteger('categories_id');
+            $table->foreign('categories_id')->references('id')->on('categories');
+
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts');
+
+
             $table->timestamps();
         });
     }

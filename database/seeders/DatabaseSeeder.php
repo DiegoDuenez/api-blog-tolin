@@ -14,12 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        //reparar usersssssssssssssssssssssssss
 
-            $this->call([
-            CategoriesSeeder::class
-            //en espera
-
-        ]);
+         //\App\Models\User::factory(10)->create();
+         \App\Models\Categories::factory(10)->create();
+         \App\Models\Post::factory(10)->create();
+         \App\Models\Post_categories::factory(10)->create();
+         \App\Models\Comments::factory(10)->create();
+         \App\Models\Reply::factory(10)->create();
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Authentication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,24 @@ Route::get('user',function(Request $request){
 });
 Route::post('register',[Authentication::class,'register']);
 
+
+//Cisco_Login
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login',[AuthController::class,'login']);
+    Route::post('logout',[AuthController::class,'logout']);
+    Route::post('refresh',[AuthController::class,'refresh']);
+    Route::post('me',[AuthController::class,'me']);
+
+});
+
+//rutas prueba brayan
+Route::get('catGet',[CategoriesController::class,'get']);
+Route::post('catInsert',[CategoriesController::class,'insert']);
+Route::post('catUpdate/id?',[CategoriesController::class,'update']);
+Route::post('catDelete/id?',[CategoriesController::class,'delete']);
