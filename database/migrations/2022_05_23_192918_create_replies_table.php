@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('replies', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->text('description');
-            $table->foreignId('id')->constrained('users');
-            $table->foreignId('id')->constrained('comments');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('comments_id');
+            $table->foreign('comments_id')->references('id')->on('comments');
             $table->timestamps();
         });
     }
