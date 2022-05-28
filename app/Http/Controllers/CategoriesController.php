@@ -20,6 +20,20 @@ class CategoriesController extends Controller
         return response()->json(['categoriesList' => $categories]);
     }
 
+        //pagina categories
+    public function getCategorie($id)
+    {
+        $categories = Categories::findOrFail($id);
+        if($categories)
+        {
+            return response()->json(['categoriesList' => $categories],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
+        }
+
+    }
+
 
     public function insert(Request $request)
     {
@@ -37,8 +51,6 @@ class CategoriesController extends Controller
         }
 
     }
-
-
 
     public function update(Request $request,$id)
     {

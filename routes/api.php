@@ -43,11 +43,15 @@ Route::group([
     Route::post('logout',[AuthController::class,'logout']);
     Route::post('refresh',[AuthController::class,'refresh']);
     Route::post('me',[AuthController::class,'me']);
+    Route::post('register', [AuthController::class,'register']);
 
 });
 
 //rutas prueba brayan
+                        //en fase de pruebas
 Route::get('catGet',[CategoriesController::class,'get']);
 Route::post('catInsert',[CategoriesController::class,'insert']);
-Route::post('catUpdate/id?',[CategoriesController::class,'update']);
-Route::post('catDelete/id?',[CategoriesController::class,'delete']);
+Route::put('catUpdate/{id}',[CategoriesController::class,'update']);
+Route::delete('catDelete/{id}',[CategoriesController::class,'delete']);
+Route::get('catGet/{id}',[CategoriesController::class,'getCategorie']);
+                        //en fase de pruebas
