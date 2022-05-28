@@ -50,6 +50,6 @@ Route::group([
                         //en fase de pruebas
 Route::get('catGet',[CategoriesController::class,'get']);
 Route::post('catInsert',[CategoriesController::class,'insert']);
-Route::update('catUpdate/id?',[CategoriesController::class,'update']);
-Route::delete('catDelete/id?',[CategoriesController::class,'delete']);
+Route::put('catUpdate/{id}',[CategoriesController::class,'update']);
+Route::delete('catDelete/{id}',[CategoriesController::class,'delete']);
                         //en fase de pruebas
