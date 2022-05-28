@@ -5,6 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\PostCategoriesController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReplyController;
 
 /*
 |--------------------------------------------------------------------------
