@@ -53,3 +53,22 @@ Route::post('catInsert',[CategoriesController::class,'insert']);
 Route::put('catUpdate/{id}',[CategoriesController::class,'update']);
 Route::delete('catDelete/{id}',[CategoriesController::class,'delete']);
                         //en fase de pruebas
+Route::get('comGet',[CommentsController::class,'get']);
+Route::post('comInsert',[CommentsController::class,'insert']);
+Route::put('comUpdate/{id}',[CommentsController::class,'update']);
+Route::delete('comDelete/{id}',[CommentsController::class,'delete']);
+
+Route::get('pCatGet',[PostCategoriesController::class,'get']);
+Route::post('pCatInsert',[PostCategoriesController::class,'insert']);
+Route::put('pCatUpdate/{id}',[PostCategoriesController::class,'update']);
+Route::delete('pCatDelete/{id}',[PostCategoriesController::class,'delete']);
+
+Route::get('postGet',[PostController::class,'get']);
+Route::post('postInsert',[PostController::class,'insert']);
+Route::put('postUpdate/{id}',[PostController::class,'update']);
+Route::delete('postDelete/{id}',[PostController::class,'delete']);
+
+Route::get('repGet',[ReplyController::class,'get']);
+Route::post('repInsert',[ReplyController::class,'insert']);
+Route::put('repUpdate/{id}',[ReplyController::class,'update']);
+Route::delete('repDelete/{id}',[ReplyController::class,'delete']);
