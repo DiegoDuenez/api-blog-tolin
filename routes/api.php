@@ -47,7 +47,9 @@ Route::group([
 });
 
 //rutas prueba brayan
+                        //en fase de pruebas
 Route::get('catGet',[CategoriesController::class,'get']);
 Route::post('catInsert',[CategoriesController::class,'insert']);
-Route::post('catUpdate/id?',[CategoriesController::class,'update']);
-Route::post('catDelete/id?',[CategoriesController::class,'delete']);
+Route::update('catUpdate/id?',[CategoriesController::class,'update']);
+Route::delete('catDelete/id?',[CategoriesController::class,'delete']);
+                        //en fase de pruebas

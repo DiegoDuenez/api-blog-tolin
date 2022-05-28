@@ -62,4 +62,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo('App\Models\Reply');
 
     }
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+
 }
