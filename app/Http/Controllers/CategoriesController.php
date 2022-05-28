@@ -31,7 +31,6 @@ class CategoriesController extends Controller
         else{
             return response()->json(["Message" => "No se encuentra"],404);
         }
-
     }
 
 
@@ -88,9 +87,18 @@ class CategoriesController extends Controller
         {
             return response()->json(['categoriesDeleteFalied'],401);
         }
+    }
 
-
-
+    public function getId($id)
+    {
+        $Categories = Categories::findOrFail($id);
+        if($Categories)
+        {
+            return response()->json(['categoriesList' => $Categories],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
+        }
     }
 
 }

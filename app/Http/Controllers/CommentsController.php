@@ -10,8 +10,7 @@ class CommentsController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('auth');
-
+        //$this->middleware('auth');
       }
 
 
@@ -79,6 +78,17 @@ class CommentsController extends Controller
         }else
         {
             return response()->json(['commentDeleteFalied'],401);
+        }
+    }
+    public function getId($id)
+    {
+        $Comments = Comments::findOrFail($id);
+        if($Comments)
+        {
+            return response()->json(['CommentsList' => $Comments],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
         }
     }
 

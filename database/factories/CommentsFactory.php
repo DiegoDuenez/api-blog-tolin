@@ -19,9 +19,8 @@ class CommentsFactory extends Factory
      */
     public function definition()
     {
-
-        $usuario=User::all()->inRandomOrder()->first();
-        $Post=Post::all()->inRandomOrder()->first();
+        $usuario=User::inRandomOrder()->first();
+        $Post=Post::inRandomOrder()->first();
 
         return [
             //

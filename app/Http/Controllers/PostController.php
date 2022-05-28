@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 
 class PostController extends Controller
 {
     //
+    public function prueba()
+    {
+        $Post=User::inRandomOrder()->first();
+        return $Post->id;
+    }
+
 
     public function get()
     {
@@ -74,5 +81,20 @@ class PostController extends Controller
             return response()->json(['PostDeleteFalied'],401);
         }
     }
+
+    public function getId($id)
+    {
+        $Post = Post::findOrFail($id);
+        if($Post)
+        {
+            return response()->json(['PostList' => $Post],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
+        }
+    }
+
+
+
 
 }

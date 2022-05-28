@@ -10,9 +10,8 @@ class Post_categories extends Model
     use HasFactory;
     protected $table = 'post_categories';
     protected $fillable = [
-        'description',
-        'posts',
-        'categories',
+        'categories_id',
+        'post_id',
     ];
     public function Categories(){
         return $this->belongsTo('App\Models\Categories');

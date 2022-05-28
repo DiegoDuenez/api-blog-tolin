@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
 
          \App\Models\User::factory(10)->create();
          \App\Models\Categories::factory(10)->create();
-         //\App\Models\Post::factory(10)->create();
-         //\App\Models\Post_categories::factory(10)->create();
-         //\App\Models\Comments::factory(10)->create();
-         //\App\Models\Reply::factory(10)->create();
+         \App\Models\Post::factory(10)->create();
+         \App\Models\Post_categories::factory(10)->create();
+         \App\Models\Comments::factory(10)->create();
+         \App\Models\Reply::factory(10)->create();
     }
 }

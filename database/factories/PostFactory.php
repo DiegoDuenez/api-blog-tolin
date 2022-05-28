@@ -18,8 +18,7 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $usuario=User::all()->inRandomOrder()->first();
-
+        $usuario=User::inRandomOrder()->first();
         return [
             'title' => Str::random(5),
             'description' => Str::random(10),

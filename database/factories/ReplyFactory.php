@@ -20,9 +20,8 @@ class ReplyFactory extends Factory
     public function definition()
     {
         
-        $usuario=User::all()->inRandomOrder()->first();
-        $Comments=Comments::all()->inRandomOrder()->first();
-
+        $usuario=User::inRandomOrder()->first();
+        $Comments=Comments::inRandomOrder()->first();
         return [
             //
             'description' => Str::random(10),

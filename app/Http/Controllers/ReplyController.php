@@ -10,8 +10,7 @@ class ReplyController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('auth');
-
+        //$this->middleware('auth');
       }
 
 
@@ -85,6 +84,21 @@ class ReplyController extends Controller
             return response()->json(['replyDeleteFalied'],401);
         }
     }
+
+    public function getId($id)
+    {
+        $Reply = Reply::findOrFail($id);
+        if($Reply)
+        {
+            return response()->json(['ReplyList' => $Reply],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
+        }
+    }
+
+
+
 
 }
 

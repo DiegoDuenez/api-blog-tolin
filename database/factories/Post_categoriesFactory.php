@@ -9,7 +9,7 @@ use App\Models\Categories;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post_categories>
  */
-class PostCategoriesFactory extends Factory
+class Post_categoriesFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +18,8 @@ class PostCategoriesFactory extends Factory
      */
     public function definition()
     {
-        $Post=Post::all()->inRandomOrder()->first();
-        $Categories=Categories::all()->inRandomOrder()->first();
-
+        $Post=Post::inRandomOrder()->first();
+        $Categories=Categories::inRandomOrder()->first();
         return [
             'categories_id' => $Categories->id,
             'post_id' => $Post->id        
