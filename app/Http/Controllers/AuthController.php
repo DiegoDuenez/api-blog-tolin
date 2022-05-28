@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login','register']]);
     }
 
     public function login()
@@ -47,5 +50,29 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $validator =Validator::make($request->all(),[
+            'name'=>'required',
+            'email'=>'required|string|email|max:120|unique:users',
+            'password'=>'required|string|min:6'
+        ]);
+        if($validator->fails())
+        {
+            return response()->json($validator->messages()->toJson(), 400);
+            #return response()->json($validator->error()->toJson(),400);
+        }
+        $user=User::create(array_merge(
+            $validator->validate(),
+            ['password'=>bcrypt($request->password)]
+        ));
+
+        return response()->json([
+            'status' => '200',
+            'message' => 'Usuario creado',
+            'usuario' => $user
+        ],201);
     }
 }
