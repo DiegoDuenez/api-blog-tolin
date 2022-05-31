@@ -10,6 +10,7 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PostCategoriesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\Admin\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,3 +87,15 @@ Route::put('repUpdate/{id}',[ReplyController::class,'update']);
 Route::delete('repDelete/{id}',[ReplyController::class,'delete']);
 Route::get('repGet/{id}',[CategoriesController::class,'getId']);
                         //en fase de pruebas
+//Cisco Routes
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'admin'
+
+], function ($router) {
+
+    Route::get('users',[UsersController::class,'getUsers'])->middleware('can:admin.users.index');
+    Route::get('user/{id}',[UsersController::class,'getUser']);
+    Route::get('usercount',[UsersController::class,'CountUsers']);
+});

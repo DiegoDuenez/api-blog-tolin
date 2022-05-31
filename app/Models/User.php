@@ -8,14 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-
-
+use Spatie\Permission\Traits\HasRoles;
 
                     //reparacion micro expressssssssssssss
 //class User extends Authenticatable
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +25,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'active'
     ];
 
     /**
@@ -75,5 +75,5 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    
+
 }
