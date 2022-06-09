@@ -96,6 +96,6 @@ Route::group([
 ], function ($router) {
 
     Route::get('users',[UsersController::class,'getUsers'])->middleware('can:admin.users.index');
-    Route::get('user/{id}',[UsersController::class,'getUser']);
-    Route::get('usercount',[UsersController::class,'CountUsers']);
+    Route::get('user/{id}',[UsersController::class,'getUser'])->middleware('can:admin.users.index');
+    Route::get('usercount',[UsersController::class,'CountUsers'])->middleware('can:admin.users.index');
 });

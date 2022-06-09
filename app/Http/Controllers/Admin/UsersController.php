@@ -16,14 +16,22 @@ class UsersController extends Controller
 
     public function getUsers(){
         $Users = User::all();
-        return response()->json(['Users' => $Users]);
+        return response()->json([
+            'status' => 200,
+            'data' => $Users,
+            'message' => "successfully"
+        ],200);
     }
 
     public function getUser($id){
         $Users = User::findOrFail($id);
         if($Users)
         {
-            return response()->json(['User' => $Users],202);
+            return response()->json([
+                'status' => 200,
+                'data' => $Users,
+                'message' => "successfully"
+            ],202);
         }
         else{
             return response()->json(["Message" => "No se encuentra"],404);
@@ -33,7 +41,11 @@ class UsersController extends Controller
 
     public function CountUsers(){
         $Users = User::all()->count();
-        return response()->json(['UserCount' => $Users],202);
+        return response()->json([
+            'status' => 200,
+            'data' => $Users,
+            'message' => "successfully"
+        ],202);
     }
 
 }
