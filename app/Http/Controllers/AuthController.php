@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+
+/**
+ * Class description
+ *
+ * @author Cisco
+ */
 class AuthController extends Controller
 {
     public function __construct()

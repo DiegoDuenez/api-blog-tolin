@@ -22,17 +22,22 @@ use App\Http\Controllers\ReplyController;
 |
 */
 
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::post('login',[Authentication::class,'login']);
+
 Route::middleware('auth:sanctum')->group(function(){
-Route::post('logout',[Authentication::class,'logout']);
-Route::get('user',function(Request $request){
-    return $request->user();
-});
+
+    Route::post('logout',[Authentication::class,'logout']);
+    Route::get('user',function(Request $request){
+        return $request->user();
+    });
 
 });
+
 Route::post('register',[Authentication::class,'register']);
 
 
@@ -52,13 +57,19 @@ Route::group([
 
 });
 
+
+
 //rutas prueba brayan
                         //en fase de pruebas
-Route::get('catGet',[CategoriesController::class,'get']);
-Route::post('catInsert',[CategoriesController::class,'insert']);
-Route::put('catUpdate/{id}',[CategoriesController::class,'update']);
-Route::delete('catDelete/{id}',[CategoriesController::class,'delete']);
-Route::get('catGet/{id}',[CategoriesController::class,'getId']);
+Route::get('categorias/{id?}',[CategoriesController::class,'get']);
+Route::post('categorias',[CategoriesController::class,'insert']);
+Route::put('categorias/{id}',[CategoriesController::class,'update']);
+Route::delete('categorias/{id}',[CategoriesController::class,'delete']);
+//Route::get('catGet',[CategoriesController::class,'get']);
+//Route::post('catInsert',[CategoriesController::class,'insert']);
+//Route::put('catUpdate/{id}',[CategoriesController::class,'update']);
+//Route::delete('catDelete/{id}',[CategoriesController::class,'delete']);
+//Route::get('catGet/{id}',[CategoriesController::class,'getId']);
 
 Route::get('comGet',[CommentsController::class,'get']);
 Route::post('comInsert',[CommentsController::class,'insert']);
