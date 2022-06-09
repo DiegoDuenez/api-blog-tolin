@@ -5,91 +5,206 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
+/**
+ * Class description
+ *
+ * @author Brayan
+ */
 class CategoriesController extends Controller
 {
-    public function __construct() {
-        //$this->middleware('auth');
-      }
 
 
-    //pagina categories
-    public function get()
+
+    /**
+     * Metodo para obtener las categorias o categoria especifica
+     * 
+     * @param Int $id En caso de solicitar un recurso especifico (categoria), por defecto es nulo
+     * @return Array array
+     */
+    public function get($id = null)
     {
-        $categories = Categories::all();
-        return response()->json(['categoriesList' => $categories]);
-    }
-
-        //pagina categories
-    public function getCategorie($id)
-    {
-        $categories = Categories::findOrFail($id);
-        if($categories)
-        {
-            return response()->json(['categoriesList' => $categories],202);
+        if($id){
+            $categorie = Categories::find($id);
+            return response()->json([
+                'status' => '200',
+                'data' => $categorie,
+                'message' => ''
+            ],200);
         }
         else{
-            return response()->json(["Message" => "No se encuentra"],404);
+            $categories = Categories::all();
+            //return response()->json(['categoriesList' => $categories]);
+            return response()->json([
+                'status' => '200',
+                'data' => $categories,
+                'message' => ''
+            ],200);
         }
+        
     }
 
 
+
+    /**
+     * Metodo para registrar categoria
+     * 
+     * @param Request $request Este parametro recibe el cuerpo de la petición
+     * @return Array array
+     */
     public function insert(Request $request)
     {
-        if ($request->validate([
-            'category_name'=>'required|min:2'
-        ]))
-        {
-            $categories=Categories::create([
+        if($request->validate([
+            'category_name'=>'required|min:2|unique:categories,category_name'
+        ],
+        [   
+            'category_name.required' => 'Por favor proporciona un nombre a la categoria',
+            'category_name.unique' => 'Este nombre de categoria ya existe',
+        ]
+        )){
+
+            $categorie = Categories::create([
                 'category_name' => $request->category_name,
             ]);
-            return response()->json(['categoriesInsertComplete' => $categories]);
 
-        }else {
-        return response()->json(['categoriesInsertFalied'],401);
+            return response()->json([
+                'status' => '201',
+                'data' => $categorie,
+                'message' => 'Se ha creado la categoria ' . $categorie->category_name
+            ],201);
+            
+        }
+        else {
+
+            return response()->json([
+                'status' => '400',
+                'data' => [],
+                'message' => 'Ha fallado la creación de la categoria'
+            ],400);
+
         }
 
     }
 
+
+
+    /**
+     * Metodo para actualizar categoria
+     * 
+     * @param Request $request Este parametro recibe el cuerpo de la petición
+     * @param Int $id Este pareametro recibe un numero entero (id) de la categoria a actualizar
+     * @return Array array
+     */
     public function update(Request $request,$id)
     {
         if ($request->validate([
-            'category_name'=>'required|min:2'
-        ]))
-        {
+            'category_name'=>'required|min:2|unique:categories,category_name'
+        ],
+        [   
+            'category_name.required' => 'Por favor proporciona un nombre a la categoria',
+            'category_name.unique' => 'Este nombre de categoria ya existe',
+        ]
+        )){
+
             $categories = Categories::findOrFail($id);
             $categories->category_name = $request->category_name;
 
-            $categories->save();
-            return response()->json(['categoriesUpdateComplete' => $categories]);
+            if($categories->save()){
 
-        }else
-        {
-            return response()->json(['categoriesUpdateFalied'],401);
+                return response()->json([
+                    'status' => '200',
+                    'data' => $categories,
+                    'message' => ''
+                ], 200);
+                
+            }
+            else{
+                
+                return response()->json([
+                    'status' => '400',
+                    'data' => [],
+                    'message' => 'No se actualizado la categoria'
+                ], 400);
+
+            }
+
+        }
+        else{
+
+            return response()->json([
+                'status' => '400',
+                'data' => [],
+                'message' => 'Ha fallado la petición'
+            ], 400);
+
         }
 
     }
 
 
 
-
-
-    public function delete(Request $request,$id)
+     /**
+     * Metodo para elimianr categoria
+     * 
+     * @param Int $id Este pareametro recibe un numero entero (id) de la categoria a eliminar
+     * @return Array array
+     */
+    public function delete($id)
     {
-        if ($request->validate([
-            'category_name'=>'required|min:2'
-        ]))
-        {
-            $categories = Categories::where('categories.id', $id)
-            ->delete();
+
+
+        if($id){
+
+            $categories = Categories::find($id);
+
+            if($categories){
+
+                if($categories->delete()){
+
+                    return response()->json([
+                        'status' => '200',
+                        'data' => [],
+                        'message' => 'Se ha eliminado la categoria'
+                    ], 200);
+
+                }
+                else{
+
+                    return response()->json([
+                        'status' => '400',
+                        'data' => [],
+                        'message' => 'No se ha podido eliminar la categoria'
+                    ], 400);
+
+                }
+
+            }
+            else{
+
+                return response()->json([
+                    'status' => '404',
+                    'data' => [],
+                    'message' => 'No se encontro el recurso solicitado'
+                ], 404);
+
+            }
             return response()->json(['categoriesUpdateComplete']);
-        }else
-        {
-            return response()->json(['categoriesDeleteFalied'],401);
+
         }
+        else{
+
+            return response()->json([
+                'status' => '400',
+                'data' => [],
+                'message' => 'Faltan parametros por enviar'
+            ], 400);
+
+        }
+        
     }
 
-    public function getId($id)
+    /*public function getId($id)
     {
         $Categories = Categories::findOrFail($id);
         if($Categories)
@@ -99,7 +214,7 @@ class CategoriesController extends Controller
         else{
             return response()->json(["Message" => "No se encuentra"],404);
         }
-    }
+    }*/
 
 }
 
