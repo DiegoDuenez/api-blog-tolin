@@ -42,24 +42,6 @@ Route::middleware('auth:sanctum')->group(function(){
 Route::post('register',[Authentication::class,'register']);
 
 
-//Cisco_Login
-Route::group([
-
-    'middleware' => 'api',
-    'prefix' => 'auth'
-
-], function ($router) {
-
-    Route::post('login',[AuthController::class,'login']);
-    Route::post('logout',[AuthController::class,'logout']);
-    Route::post('refresh',[AuthController::class,'refresh']);
-    Route::post('me',[AuthController::class,'me']);
-    Route::post('register', [AuthController::class,'register']);
-
-});
-
-
-
 //rutas prueba brayan
                         //en fase de pruebas
 Route::get('categorias/{id?}',[CategoriesController::class,'get']);
@@ -109,4 +91,25 @@ Route::group([
     Route::get('users',[UsersController::class,'getUsers'])->middleware('can:admin.users.index');
     Route::get('user/{id}',[UsersController::class,'getUser'])->middleware('can:admin.users.index');
     Route::get('usercount',[UsersController::class,'CountUsers'])->middleware('can:admin.users.index');
+    Route::get('roles',[UsersController::class,'getRol'])->middleware('can:admin.users.index');
+    Route::get('whois',[UsersController::class,'whois'])->middleware('can:admin.users.index');
 });
+
+
+//Cisco_Login
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login',[AuthController::class,'login']);
+    Route::post('logout',[AuthController::class,'logout']);
+    Route::post('refresh',[AuthController::class,'refresh']);
+    Route::post('me',[AuthController::class,'me']);
+    Route::post('register', [AuthController::class,'register']);
+
+});
+
+
