@@ -18,11 +18,11 @@ return new class extends Migration
             $table->text('description');
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('comments_id');
-            $table->foreign('comments_id')->references('id')->on('comments');
-            
+            $table->foreign('comments_id')->references('id')->on('comments')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

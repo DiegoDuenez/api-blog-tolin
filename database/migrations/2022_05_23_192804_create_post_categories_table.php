@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('post_categories', function (Blueprint $table) 
+        Schema::create('post_categories', function (Blueprint $table)
         {
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('categories_id');
-            $table->foreign('categories_id')->references('id')->on('categories');
+            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
 
             $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
 
 
             $table->timestamps();
