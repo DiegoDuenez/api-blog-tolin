@@ -54,31 +54,31 @@ Route::delete('categorias/{id}',[CategoriesController::class,'delete']);
 //Route::delete('catDelete/{id}',[CategoriesController::class,'delete']);
 //Route::get('catGet/{id}',[CategoriesController::class,'getId']);
 
-Route::get('comGet',[CommentsController::class,'get']);
-Route::post('comInsert',[CommentsController::class,'insert']);
-Route::put('comUpdate/{id}',[CommentsController::class,'update']);
-Route::delete('comDelete/{id}',[CommentsController::class,'delete']);
-Route::get('comGet/{id}',[CategoriesController::class,'getId']);
+Route::get('Comments',[CommentsController::class,'get']);
+Route::post('Comments',[CommentsController::class,'insert']);
+Route::put('Comments/{id}',[CommentsController::class,'update']);
+Route::delete('Comments/{id}',[CommentsController::class,'delete']);
+Route::get('Comments/{id}',[CategoriesController::class,'getId']);
 
-Route::get('pCatGet',[PostCategoriesController::class,'get']);
-Route::post('pCatInsert',[PostCategoriesController::class,'insert']);
-Route::put('pCatUpdate/{id}',[PostCategoriesController::class,'update']);
-Route::delete('pCatDelete/{id}',[PostCategoriesController::class,'delete']);
-Route::get('pCatGet/{id}',[CategoriesController::class,'getId']);
+Route::get('PostCategories',[PostCategoriesController::class,'get']);
+Route::post('PostCategories',[PostCategoriesController::class,'insert']);
+Route::put('PostCategories/{id}',[PostCategoriesController::class,'update']);
+Route::delete('PostCategories/{id}',[PostCategoriesController::class,'delete']);
+Route::get('PostCategories/{id}',[CategoriesController::class,'getId']);
 
 Route::get('pruebas',[PostController::class,'prueba']);
 
-Route::get('postGet',[PostController::class,'get']);
-Route::post('postInsert',[PostController::class,'insert']);
-Route::put('postUpdate/{id}',[PostController::class,'update']);
-Route::delete('postDelete/{id}',[PostController::class,'delete']);
-Route::get('postGet/{id}',[CategoriesController::class,'getId']);
+Route::get('Post',[PostController::class,'get']);
+Route::post('Post',[PostController::class,'insert']);
+Route::put('Post/{id}',[PostController::class,'update']);
+Route::delete('Post/{id}',[PostController::class,'delete']);
+Route::get('Post/{id}',[CategoriesController::class,'getId']);
 
-Route::get('repGet',[ReplyController::class,'get']);
-Route::post('repInsert',[ReplyController::class,'insert']);
-Route::put('repUpdate/{id}',[ReplyController::class,'update']);
-Route::delete('repDelete/{id}',[ReplyController::class,'delete']);
-Route::get('repGet/{id}',[CategoriesController::class,'getId']);
+Route::get('Reply',[ReplyController::class,'get']);
+Route::post('Reply',[ReplyController::class,'insert']);
+Route::put('Reply/{id}',[ReplyController::class,'update']);
+Route::delete('Reply/{id}',[ReplyController::class,'delete']);
+Route::get('Reply/{id}',[CategoriesController::class,'getId']);
                         //en fase de pruebas
 //Cisco Routes
 Route::group([
