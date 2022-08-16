@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comments;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class CommentsController extends Controller
@@ -18,9 +19,27 @@ class CommentsController extends Controller
     public function get()
     {
         $Comments = Comments::all();
+        foreach($Comments as $CommentsList) {
+            $user = User::findOrFail($CommentsList['user_id']);
+            $CommentsList['user_id']=$user->name;
+        }
         return response()->json(['commentsList' => $Comments]);
     }
 
+    public function getId($id)
+    {
+        $Comments = Comments::findOrFail($id);
+        $user = User::findOrFail($Comments->user_id);
+        $Comments->user_id=$user->name;
+
+        if($Comments)
+        {
+            return response()->json(['CommentsList' => $Comments],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
+        }
+    }
 
     public function insert(Request $request)
     {
@@ -80,17 +99,7 @@ class CommentsController extends Controller
             return response()->json(['commentDeleteFalied'],401);
         }
     }
-    public function getId($id)
-    {
-        $Comments = Comments::findOrFail($id);
-        if($Comments)
-        {
-            return response()->json(['CommentsList' => $Comments],202);
-        }
-        else{
-            return response()->json(["Message" => "No se encuentra"],404);
-        }
-    }
+
 
 }
 

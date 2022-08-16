@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reply;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class ReplyController extends Controller
@@ -18,7 +19,26 @@ class ReplyController extends Controller
     public function get()
     {
         $reply = Reply::all();
+        foreach($reply as $replyList) {
+            $user = User::findOrFail($replyList['user_id']);
+            $replyList['user_id']=$user->name;
+        }
         return response()->json(['replyList' => $reply]);
+    }
+
+    public function getId($id)
+    {
+        $Reply = Reply::findOrFail($id);
+        $user = User::findOrFail($Reply->user_id);
+        $Reply->user_id=$user->name;
+
+        if($Reply)
+        {
+            return response()->json(['ReplyList' => $Reply],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
+        }
     }
 
 
@@ -82,18 +102,6 @@ class ReplyController extends Controller
         }else
         {
             return response()->json(['replyDeleteFalied'],401);
-        }
-    }
-
-    public function getId($id)
-    {
-        $Reply = Reply::findOrFail($id);
-        if($Reply)
-        {
-            return response()->json(['ReplyList' => $Reply],202);
-        }
-        else{
-            return response()->json(["Message" => "No se encuentra"],404);
         }
     }
 
