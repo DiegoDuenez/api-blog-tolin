@@ -22,6 +22,20 @@ class PostController extends Controller
         return response()->json(['postList' => $Post]);
     }
 
+    public function getId($id)
+    {
+        $Post = Post::findOrFail($id);
+
+        if($Post)
+        {
+            return response()->json(['PostList' => $Post],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
+        }
+    }
+
+
 
     public function insert(Request $request)
     {
@@ -81,19 +95,6 @@ class PostController extends Controller
             return response()->json(['PostDeleteFalied'],401);
         }
     }
-
-    public function getId($id)
-    {
-        $Post = Post::findOrFail($id);
-        if($Post)
-        {
-            return response()->json(['PostList' => $Post],202);
-        }
-        else{
-            return response()->json(["Message" => "No se encuentra"],404);
-        }
-    }
-
 
 
 

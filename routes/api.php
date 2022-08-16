@@ -58,13 +58,13 @@ Route::get('Comments',[CommentsController::class,'get']);
 Route::post('Comments',[CommentsController::class,'insert']);
 Route::put('Comments/{id}',[CommentsController::class,'update']);
 Route::delete('Comments/{id}',[CommentsController::class,'delete']);
-Route::get('Comments/{id}',[CategoriesController::class,'getId']);
+Route::get('Comments/{id}',[CommentsController::class,'getId']);
 
 Route::get('PostCategories',[PostCategoriesController::class,'get']);
 Route::post('PostCategories',[PostCategoriesController::class,'insert']);
 Route::put('PostCategories/{id}',[PostCategoriesController::class,'update']);
 Route::delete('PostCategories/{id}',[PostCategoriesController::class,'delete']);
-Route::get('PostCategories/{id}',[CategoriesController::class,'getId']);
+Route::get('PostCategories/{id}',[PostCategoriesController::class,'getId']);
 
 Route::get('pruebas',[PostController::class,'prueba']);
 
@@ -72,13 +72,13 @@ Route::get('Post',[PostController::class,'get']);
 Route::post('Post',[PostController::class,'insert']);
 Route::put('Post/{id}',[PostController::class,'update']);
 Route::delete('Post/{id}',[PostController::class,'delete']);
-Route::get('Post/{id}',[CategoriesController::class,'getId']);
+Route::get('Post/{id}',[PostController::class,'getId']);
 
 Route::get('Reply',[ReplyController::class,'get']);
 Route::post('Reply',[ReplyController::class,'insert']);
 Route::put('Reply/{id}',[ReplyController::class,'update']);
 Route::delete('Reply/{id}',[ReplyController::class,'delete']);
-Route::get('Reply/{id}',[CategoriesController::class,'getId']);
+Route::get('Reply/{id}',[ReplyController::class,'getId']);
                         //en fase de pruebas
 //Cisco Routes
 Route::group([
