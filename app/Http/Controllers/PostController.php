@@ -19,12 +19,18 @@ class PostController extends Controller
     public function get()
     {
         $Post = Post::all();
+        foreach($Post as $postList) {
+            $user = User::findOrFail($postList['user_id']);
+            $postList['user_id']=$user->name;
+        }
         return response()->json(['postList' => $Post]);
     }
 
     public function getId($id)
     {
         $Post = Post::findOrFail($id);
+        $user = User::findOrFail($Post->user_id);
+        $Post->user_id=$user->name;
 
         if($Post)
         {
