@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -19,8 +20,12 @@ class PostController extends Controller
     public function get()
     {
         $Post = Post::all();
+        //return response()->json(['postList' => $Post]);
+        //$cas = $Post->created_at->format('d/m/Y');
+        //return response()->json(['postList' =>$Post->['created_at']]);
         foreach($Post as $postList) {
             $user = User::findOrFail($postList['user_id']);
+            //$postList['created_at']=$Post->created_at->format('d/m/Y');
             $postList['user_id']=$user->name;
         }
         return response()->json(['postList' => $Post]);
@@ -45,16 +50,19 @@ class PostController extends Controller
 
     public function insert(Request $request)
     {
-        if ($request->validate([
-            'title'=>'required',
-            'description'=>'required',
-            'user_id'=>'required'
-        ]))
+        $user = Auth::user();
+        $validated = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($validated)
         {
+           // return response()->json(['postInsertComplete' => 'adios' ]);
             $Post=Post::create([
-                'post' => $request->post,
+                'title' => $request->title,
                 'description'=>$request->description,
-                'user_id'=>$request->user_id
+                'user_id'=>$user->id
             ]);
             return response()->json(['postInsertComplete' => $Post]);
 

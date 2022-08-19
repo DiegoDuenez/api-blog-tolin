@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model
 {
@@ -12,7 +13,7 @@ class Post extends Model
     protected $fillable = [
         'title',
         'description',
-        'users',
+        'user_id',
     ];
     public function User(){
 
@@ -23,5 +24,12 @@ class Post extends Model
 
         return $this->hasMany('App\Models\Post_categories');
 
+    }
+    public function getCreatedAtAttribute($value){
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+
+    public function getUpdatedAtAttribute($value){
+        return Carbon::parse($value)->format('d-m-Y');
     }
 }

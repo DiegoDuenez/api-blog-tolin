@@ -69,7 +69,7 @@ Route::get('PostCategories/{id}',[PostCategoriesController::class,'getId']);
 Route::get('pruebas',[PostController::class,'prueba']);
 
 Route::get('Post',[PostController::class,'get']);
-Route::post('Post',[PostController::class,'insert']);
+Route::post('Post',[PostController::class,'insert'])->middleware('auth');
 Route::put('Post/{id}',[PostController::class,'update']);
 Route::delete('Post/{id}',[PostController::class,'delete']);
 Route::get('Post/{id}',[PostController::class,'getId']);
