@@ -59,12 +59,14 @@ Route::post('Comments',[CommentsController::class,'insert']);
 Route::put('Comments/{id}',[CommentsController::class,'update']);
 Route::delete('Comments/{id}',[CommentsController::class,'delete']);
 Route::get('Comments/{id}',[CommentsController::class,'getId']);
+Route::get('post/{id}/Comments',[CommentsController::class,'getComentid']);
 
 Route::get('PostCategories',[PostCategoriesController::class,'get']);
 Route::post('PostCategories',[PostCategoriesController::class,'insert']);
 Route::put('PostCategories/{id}',[PostCategoriesController::class,'update']);
 Route::delete('PostCategories/{id}',[PostCategoriesController::class,'delete']);
 Route::get('PostCategories/{id}',[PostCategoriesController::class,'getId']);
+Route::get('SearchPostCategories/{id}',[PostCategoriesController::class,'SearchgetId']);
 
 Route::get('pruebas',[PostController::class,'prueba']);
 

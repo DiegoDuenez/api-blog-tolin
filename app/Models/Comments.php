@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class Comments extends Model
 {
     use HasFactory;
@@ -23,5 +23,13 @@ class Comments extends Model
 
         return $this->hasMany('App\Models\Reply');
 
+    }
+
+    public function getCreatedAtAttribute($value){
+        return Carbon::parse($value)->format('d/m/Y H:i:s.A');
+    }
+
+    public function getUpdatedAtAttribute($value){
+        return Carbon::parse($value)->format('d/m/Y H:i:s.A');
     }
 }

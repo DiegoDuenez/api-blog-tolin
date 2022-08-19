@@ -19,14 +19,14 @@ class CategoriesController extends Controller
 
     /**
      * Metodo para obtener las categorias o categoria especifica
-     * 
+     *
      * @param Int $id En caso de solicitar un recurso especifico (categoria), por defecto es nulo
      * @return Array array
      */
     public function get($id = null)
     {
         if($id){
-            $categorie = Categories::find($id);
+            $categorie = Categories::findOrFail($id);
             return response()->json([
                 'status' => '200',
                 'data' => $categorie,
@@ -42,14 +42,14 @@ class CategoriesController extends Controller
                 'message' => ''
             ],200);
         }
-        
+
     }
 
 
 
     /**
      * Metodo para registrar categoria
-     * 
+     *
      * @param Request $request Este parametro recibe el cuerpo de la petición
      * @return Array array
      */
@@ -58,7 +58,7 @@ class CategoriesController extends Controller
         if($request->validate([
             'category_name'=>'required|min:2|unique:categories,category_name'
         ],
-        [   
+        [
             'category_name.required' => 'Por favor proporciona un nombre a la categoria',
             'category_name.unique' => 'Este nombre de categoria ya existe',
         ]
@@ -73,7 +73,7 @@ class CategoriesController extends Controller
                 'data' => $categorie,
                 'message' => 'Se ha creado la categoria ' . $categorie->category_name
             ],201);
-            
+
         }
         else {
 
@@ -91,7 +91,7 @@ class CategoriesController extends Controller
 
     /**
      * Metodo para actualizar categoria
-     * 
+     *
      * @param Request $request Este parametro recibe el cuerpo de la petición
      * @param Int $id Este pareametro recibe un numero entero (id) de la categoria a actualizar
      * @return Array array
@@ -101,7 +101,7 @@ class CategoriesController extends Controller
         if ($request->validate([
             'category_name'=>'required|min:2|unique:categories,category_name'
         ],
-        [   
+        [
             'category_name.required' => 'Por favor proporciona un nombre a la categoria',
             'category_name.unique' => 'Este nombre de categoria ya existe',
         ]
@@ -117,10 +117,10 @@ class CategoriesController extends Controller
                     'data' => $categories,
                     'message' => ''
                 ], 200);
-                
+
             }
             else{
-                
+
                 return response()->json([
                     'status' => '400',
                     'data' => [],
@@ -146,7 +146,7 @@ class CategoriesController extends Controller
 
      /**
      * Metodo para elimianr categoria
-     * 
+     *
      * @param Int $id Este pareametro recibe un numero entero (id) de la categoria a eliminar
      * @return Array array
      */
@@ -201,7 +201,7 @@ class CategoriesController extends Controller
             ], 400);
 
         }
-        
+
     }
 
     /*public function getId($id)

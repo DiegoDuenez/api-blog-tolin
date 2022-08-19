@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comments;
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 
 class CommentsController extends Controller
@@ -40,6 +41,25 @@ class CommentsController extends Controller
             return response()->json(["Message" => "No se encuentra"],404);
         }
     }
+
+    public function getComentid($id)
+    {
+        $Post = Post::findOrFail($id);
+        $Comments = Comments::where('post_id',$Post->id)->get();
+        foreach($Comments as $Commentslist) {
+            $user = User::findOrFail($Commentslist['user_id']);
+            //$postList['created_at']=$Post->created_at->format('d/m/Y');
+            $Commentslist['user_id']=$user->name;
+        }
+        if($Comments)
+        {
+            return response()->json(['CommentsList' => $Comments,'total'=> $Comments->count()],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
+        }
+    }
+
 
     public function insert(Request $request)
     {

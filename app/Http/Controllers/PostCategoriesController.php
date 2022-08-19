@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post_categories;
-
+use App\Models\Categories;
 use Illuminate\Http\Request;
 
 class PostCategoriesController extends Controller
 {
-    
+
     public function get()
     {
         $Post_categories = Post_categories::all();
@@ -69,13 +69,26 @@ class PostCategoriesController extends Controller
             return response()->json(['Post_categoriesDeleteFalied'],401);
         }
     }
-    
+
     public function getId($id)
     {
         $Post_categories = Post_categories::findOrFail($id);
         if($Post_categories)
         {
             return response()->json(['Post_categoriesList' => $Post_categories],202);
+        }
+        else{
+            return response()->json(["Message" => "No se encuentra"],404);
+        }
+    }
+
+    public function SearchgetId($id)
+    {
+        $categorie = Categories::findOrFail($id);
+
+        if($categorie)
+        {
+            return response()->json(['Categories' => $categorie],202);
         }
         else{
             return response()->json(["Message" => "No se encuentra"],404);

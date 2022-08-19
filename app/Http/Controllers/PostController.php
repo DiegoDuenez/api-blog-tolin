@@ -19,7 +19,7 @@ class PostController extends Controller
 
     public function get()
     {
-        $Post = Post::all();
+        $Post = Post::orderBy('created_at','DESC')->get();
         //return response()->json(['postList' => $Post]);
         //$cas = $Post->created_at->format('d/m/Y');
         //return response()->json(['postList' =>$Post->['created_at']]);
@@ -28,6 +28,7 @@ class PostController extends Controller
             //$postList['created_at']=$Post->created_at->format('d/m/Y');
             $postList['user_id']=$user->name;
         }
+
         return response()->json(['postList' => $Post]);
     }
 
