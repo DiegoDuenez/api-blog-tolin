@@ -55,7 +55,7 @@ Route::delete('categorias/{id}',[CategoriesController::class,'delete']);
 //Route::get('catGet/{id}',[CategoriesController::class,'getId']);
 
 Route::get('Comments',[CommentsController::class,'get']);
-Route::post('Comments',[CommentsController::class,'insert']);
+Route::post('post/{id}/Comments',[CommentsController::class,'insert'])->middleware('auth');;
 Route::put('Comments/{id}',[CommentsController::class,'update']);
 Route::delete('Comments/{id}',[CommentsController::class,'delete']);
 Route::get('Comments/{id}',[CommentsController::class,'getId']);

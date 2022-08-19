@@ -7,7 +7,7 @@ use App\Models\Comments;
 use App\Models\User;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class CommentsController extends Controller
 {
 
@@ -61,23 +61,29 @@ class CommentsController extends Controller
     }
 
 
-    public function insert(Request $request)
+    public function insert(Request $request,$id)
     {
+        $Post = Post::findOrFail($id);
+
+        if($Post){
+            $user = Auth::user();
         if ($request->validate([
             'description'=>'required|min:1',
-            'id_post'=>'required',
-            'id_user'=>'required'
         ]))
         {
+
             $Comments=Comments::create([
                 'description' => $request->description,
-                'id_post' => $request->nombreCategoria,
-                'id_user' => $request->id_user
+                'post_id' => $id,
+                'user_id' => $user->id
             ]);
             return response()->json(['commentInsertComplete' => $Comments]);
 
         }else {
         return response()->json(['commentInsertFalied'],401);
+        }
+        }else{
+            return response()->json(['No exite'],401);
         }
 
     }
